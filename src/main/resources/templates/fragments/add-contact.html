@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Add Contact Fragment</title>
+</head>
+<body>
+
+	<!-- Add Edit Modal HTML -->
+	<div id="addEditContactModal" th:fragment="addContactModal" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<form id="addEditContactModalForm">
+					<div class="modal-header">
+						<h4 id="addEditContactModalTitle" class="modal-title"></h4>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					</div>
+					<div class="modal-body">
+					
+						<div class="form-row">
+							<div class="form-group col-md-9">
+								<label>Company</label>
+								<select id="contactCompany" name="contactCompany" class="form-control"></select>
+							</div>
+							<div class="form-group col-md-3">
+								<label>&nbsp;</label>
+								<button id="newCompanyButton" type="button" class="form-control btn btn-success">New</button>
+							</div>
+						</div>
+						
+						<div class="form-row">
+							<div class="form-group col-md-6">
+								<label>First Name</label>
+								<input id="firstName" name="firstName" type="text" class="form-control" required>
+							</div>
+							<div class="form-group col-md-6">
+								<label>Last Name</label>
+								<input id="lastName" name="lastName" type="text" class="form-control" required>
+							</div>
+						</div>
+						
+						<div class="form-row">
+							<div class="form-group col-md-6">
+								<label>Phone No.</label>
+								<input id="contactPhone" name="contactPhone" type="tel" class="form-control" required>
+							</div>
+							<div class="form-group col-md-6">
+								<label>Email</label>
+								<input id="email" name="email" type="email" class="form-control" required>
+							</div>
+						</div>
+						
+						<div class="form-row">
+							<div class="form-group col-md-6">
+								<label>Street</label>
+								<input id="contactStreet" name="" type="text" class="form-control" required />
+							</div>
+							<div class="form-group col-md-6">
+								<label>City</label>
+								<input id="contactCity" name="contactCity" type="text" class="form-control" required>
+							</div>
+						</div>
+						
+						<div class="form-row">
+							<div class="form-group col-md-6">
+								<label>State</label>
+								<select id="contactState" name="contactState" class="form-control" required>
+									<option value="" selected disabled hidden="true">Choose value</option>
+								</select>
+							</div>
+							<div class="form-group col-md-6">
+								<label>ZIP</label>
+								<input id="contactZIP" name="contactZIP" type="text" class="form-control" required>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label>Spouse's Name</label>
+							<input id="contactSpouseName" name="contactSpouseName" type="text" class="form-control">
+						</div>
+						<div class="form-group">
+							<label>Children if any</label>
+							<textarea id="contactChildrenNames" name="contactChildrenNames" rows="2" class="form-control">
+                        </textarea>
+						</div>
+						
+						<div class="form-group">
+							<label>Notes</label>
+							<textarea id="contactNotes" name="contactNotes" rows="2" class="form-control">
+                        </textarea>
+						</div>
+
+						<div>
+							<ul id="addEditContactError" class="text-danger" style="display: none"></ul>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+						<input id="addEditContactModalSubmit" type="button" class="btn btn-success" value="">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

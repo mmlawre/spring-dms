@@ -1,0 +1,30 @@
+body {
+	color: #566787;
+	background: #f5f5f5;
+	font-family: 'Varela Round', sans-serif;
+	font-size: 14px;
+}
+
+.vertical-center {
+	min-height: 100%; /* Fallback for browsers do NOT support vh unit */
+	min-height: 100vh; /* These two lines are counted as one :-)       */
+	display: flex;
+	align-items: center;
+}
+
+.paginate_button {
+	padding: 2px 8px !important;
+}
+
+th, td {
+	white-space: nowrap;
+}
+
+div.dataTables_wrapper {
+	margin: 0 auto;
+}
+
+.card-image {
+	align-self: center;
+	padding-bottom: 20px;
+}

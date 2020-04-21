@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+
+<html layout:decorate="~{layouts/standard}" lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<title>Faculties</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+<link rel="stylesheet" th:href="@{/css/crud-styles.css}" />
+</head>
+<body>
+
+	<div layout:fragment="content">
+		<div class="container">
+			<div class="table-wrapper">
+				<div class="table-title">
+					<div class="row">
+						<div class="col-sm-6">
+							<h2>
+								Manage
+								<b>Faculty</b>
+							</h2>
+						</div>
+						<div class="col-sm-6">
+							<a id="addButton" class="btn btn-success">
+								<i class="material-icons">&#xE147;</i>
+								<span>Add New Faculty</span>
+							</a>
+							<a id="deleteButton" class="btn btn-danger">
+								<i class="material-icons">&#xE15C;</i>
+								<span>Delete</span>
+							</a>
+						</div>
+					</div>
+				</div>
+
+				<!-- Data table instance -->
+				<table id="dataTable" class="table table-striped table-hover">
+				</table>
+
+			</div>
+		</div>
+
+		<!-- Add Edit Modal HTML -->
+		<div id="addEditModal" class="modal fade">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<form id="addEditModalForm">
+						<div class="modal-header">
+							<h4 id="addEditModalTitle" class="modal-title"></h4>
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						</div>
+						<div class="modal-body">
+
+							<!-- Holds record ID -->
+							<input id="facultyId" name="facultyId" type="hidden" />
+
+							<div class="form-group">
+								<label>Faculty Name</label>
+								<input id="facultyName" name="facultyName" type="text" class="form-control" />
+							</div>
+							<div class="form-group">
+								<label>Department</label>
+								<input id="department" name="department" type="text" class="form-control" required>
+							</div>
+							<div class="form-group">
+								<label>E-mail</label>
+								<input id="email" name="email" type="email" class="form-control" required>
+							</div>
+							<div>
+								<ul id="addEditError" class="text-danger" style="display: none"></ul>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+							<input id="addEditModalSubmit" type="button" class="btn btn-success" value="">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<!-- Delete Modal HTML -->
+		<div id="deleteModal" class="modal fade">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<form>
+						<div class="modal-header">
+							<h4 class="modal-title">Delete Faculty</h4>
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						</div>
+						<div class="modal-body">
+							<p id="deleteMessage"></p>
+							<p class="text-warning">
+								<small>This action cannot be undone.</small>
+							</p>
+							<div>
+								<ul id="deleteError" class="text-danger" style="display: none"></ul>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<input id="deleteModalCancel" type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+							<input id="deleteModalSubmit" type="button" class="btn btn-danger" value="Delete">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<th:block layout:fragment="scripts">
+		<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+		<script th:src="@{/js/crud-scripts.js}"></script>
+		<script th:src="@{/js/faculty.js}"></script>
+	</th:block>
+</body>
+</html>

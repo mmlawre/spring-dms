@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+
+<html layout:decorate="~{layouts/standard}" lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<title>Contacts</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+<link rel="stylesheet" th:href="@{/css/crud-styles.css}" />
+</head>
+<body>
+
+	<div layout:fragment="content">
+		<div class="container">
+			<div class="table-wrapper">
+				<div class="table-title">
+					<div class="row">
+						<div class="col-sm-6">
+							<h2>
+								Manage
+								<b>Contacts</b>
+							</h2>
+						</div>
+						<div class="col-sm-6">
+							<a id="addButton" class="btn btn-success">
+								<i class="material-icons">&#xE147;</i>
+								<span>Add New Contact</span>
+							</a>
+							<a id="deleteButton" class="btn btn-danger">
+								<i class="material-icons">&#xE15C;</i>
+								<span>Delete</span>
+							</a>
+						</div>
+					</div>
+				</div>
+
+				<!-- Data table instance -->
+				<table id="dataTable" class="table table-striped table-hover">
+				</table>
+
+			</div>
+		</div>
+
+		<!-- Add Edit Modal HTML -->
+		<div id="addEditModal" class="modal fade">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<form id="addEditModalForm">
+						<div class="modal-header">
+							<h4 id="addEditModalTitle" class="modal-title"></h4>
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						</div>
+						<div class="modal-body">
+							<!-- Holds record ID -->
+							<input id="contactId" name="contactId" type="hidden" />
+
+							<div class="form-row">
+								<div class="form-group col-md-9">
+									<label>Company</label>
+									<select id="contactCompany" name="contactCompany" class="form-control"></select>
+								</div>
+								<div class="form-group col-md-3">
+									<label>&nbsp;</label>
+									<button id="newCompanyButton" type="button" class="form-control btn btn-success">New</button>
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="form-group col-md-6">
+									<label>First Name</label>
+									<input id="firstName" name="firstName" type="text" class="form-control" required>
+								</div>
+								<div class="form-group col-md-6">
+									<label>Last Name</label>
+									<input id="lastName" name="lastName" type="text" class="form-control" required>
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="form-group col-md-6">
+									<label>Phone No.</label>
+									<input id="contactPhone" name="contactPhone" type="tel" class="form-control" required>
+								</div>
+								<div class="form-group col-md-6">
+									<label>Email</label>
+									<input id="email" name="email" type="email" class="form-control" required>
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="form-group col-md-6">
+									<label>Street</label>
+									<input id="contactStreet" name="" type="text" class="form-control" required />
+								</div>
+								<div class="form-group col-md-6">
+									<label>City</label>
+									<input id="contactCity" name="contactCity" type="text" class="form-control" required>
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="form-group col-md-6">
+									<label>State</label>
+									<select id="contactState" name="contactState" class="form-control" required>
+										<option value="" selected disabled hidden="true">Choose value</option>
+									</select>
+								</div>
+								<div class="form-group col-md-6">
+									<label>ZIP</label>
+									<input id="contactZIP" name="contactZIP" type="text" class="form-control" required>
+								</div>
+							</div>
+							<div class="form-group">
+								<label>Spouse's Name</label>
+								<input id="contactSpouseName" name="contactSpouseName" type="text" class="form-control">
+							</div>
+							<div class="form-group">
+								<label>Children if any</label>
+								<textarea id="contactChildrenNames" name="contactChildrenNames" rows="2" class="form-control">
+								</textarea>
+							</div>
+							<div class="form-group">
+								<label>Notes</label>
+								<textarea id="contactNotes" name="contactNotes" rows="2" class="form-control">
+								</textarea>
+							</div>
+							<div>
+								<ul id="addEditError" class="text-danger" style="display: none"></ul>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+							<input id="addEditModalSubmit" type="button" class="btn btn-success" value="">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<!-- Delete Modal HTML -->
+		<div id="deleteModal" class="modal fade">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<form>
+						<div class="modal-header">
+							<h4 class="modal-title">Delete Contact</h4>
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						</div>
+						<div class="modal-body">
+							<p id="deleteMessage"></p>
+							<p class="text-warning">
+								<small>This action cannot be undone.</small>
+							</p>
+							<div>
+								<ul id="deleteError" class="text-danger" style="display: none"></ul>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<input id="deleteModalCancel" type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+							<input id="deleteModalSubmit" type="button" class="btn btn-danger" value="Delete">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<!-- Add / edit company modal. -->
+		<div th:replace="fragments/add-company::addCompanyModal"></div>
+	</div>
+
+	<div class="alert alert-success" id="successAlert">
+		<button type="button" class="close" data-dismiss="alert">x</button>
+		<strong>Success! </strong>
+		<span class="message"></span>
+	</div>
+
+	<div class="alert alert-danger" id="dangerAlert">
+		<button type="button" class="close" data-dismiss="alert">x</button>
+		<strong>Success! </strong>
+		<span class="message"></span>
+	</div>
+
+	<th:block layout:fragment="scripts">
+		<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+		<script th:src="@{/js/crud-scripts.js}"></script>
+		<script th:src="@{/js/contacts.js}"></script>
+		<script th:src="@{/js/fragments/add-company.js}"></script>
+	</th:block>
+</body>
+</html>

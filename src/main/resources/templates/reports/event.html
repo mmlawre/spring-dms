@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+
+<html layout:decorate="~{/layouts/standard}" lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<title>Event Report</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" th:href="@{/css/crud-styles.css}" />
+</head>
+<body>
+
+	<div layout:fragment="content">
+		<div class="container">
+			<div class="table-wrapper">
+				<div class="table-title">
+					<h2>Event Report</h2>
+				</div>
+				<div>
+					<form id="reportForm" th:action="@{/reports/event}" th:object="${filter}" method="POST">
+						<input type="hidden" th:field="*{reportType}" />
+
+						<div class="form-row">
+							<div class="form-group col-md-6">
+								<label for="eventType">Event Type</label>
+								<select class="form-control" th:field="*{eventType}">
+									<option value="" selected disabled hidden="true">Choose value</option>
+								</select>
+							</div>
+							<div class="form-group col-md-3">
+								<label for="dateFrom">From</label>
+								<input type="date" th:field="*{dateFrom}" class="form-control" required />
+							</div>
+							<div class="form-group col-md-3">
+								<label for="dateTo">To</label>
+								<input type="date" th:field="*{dateTo}" class="form-control" required />
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-md-6">
+								<label for="contact">Contact</label>
+								<select id="contact" class="form-control" th:field="*{contactId}">
+									<option value="" selected disabled hidden="true">Choose value</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-md-6">
+								<label for="faculty">Faculty</label>
+								<select id="faculty" class="form-control" th:field="*{facultyId}">
+									<option value="" selected disabled hidden="true">Choose value</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-md-10"></div>
+
+							<div class="form-group col-md-2">
+								<label>&nbsp;</label>
+								<div class="dropdown">
+									<button id="generateReportButton" class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown"
+										aria-haspopup="true" aria-expanded="false">Generate Report</button>
+									<div class="dropdown-menu" aria-labelledby="generateReportButton">
+										<a id="pdfReport" class="dropdown-item generate-report" href="#">PDF</a>
+										<a id="csvReport" class="dropdown-item generate-report" href="#">CSV</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<th:block layout:fragment="scripts">
+		<script th:src="@{/js/reports/event.js}"></script>
+	</th:block>
+</body>
+</html>
